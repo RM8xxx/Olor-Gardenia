@@ -1,0 +1,8 @@
+{
+  "name": "Olor Gardenia",
+  "description": "Muestrario de fragancias de Olor Gardenia, distribuidores autorizados de Perfumes Maria Maria",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
