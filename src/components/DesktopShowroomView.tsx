@@ -26,7 +26,6 @@ import { PerfumeProduct, ProductCategory } from '../types';
 import { GenderIcon } from './GenderBadge';
 import { OlfactoryFamily, OLFACTORY_FAMILIES, OccasionFilter, OCCASION_FILTERS } from './InventoryView';
 import { LotusIcon } from './LotusIcon';
-import { PhotoAuditGridModal } from './PhotoAuditGridModal';
 import { BusinessMovementsView } from './BusinessMovementsView';
 import { getOptimizedImageUrl } from '../utils/imageUrl';
 import { triggerAdminAccessHaptic, triggerAdminActionHaptic } from '../utils/haptics';
@@ -98,7 +97,6 @@ export const DesktopShowroomView: React.FC<DesktopShowroomViewProps> = ({
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
   const [editingProduct, setEditingProduct] = useState<PerfumeProduct | null>(null);
   const [adminFilter, setAdminFilter] = useState<'all' | 'popular' | 'wishlist' | 'brands' | null>(null);
-  const [isPhotoAuditOpen, setIsPhotoAuditOpen] = useState<boolean>(false);
   const [isBusinessModeOpen, setIsBusinessModeOpen] = useState<boolean>(false);
 
   // Discreet Visitor Tracking State (PC Mode Header) - Auto-refreshing count
@@ -374,18 +372,6 @@ export const DesktopShowroomView: React.FC<DesktopShowroomViewProps> = ({
             >
               <Store className="w-4 h-4 text-[#12131A]" />
               <span>Modo Negocio</span>
-            </button>
-
-            {/* Auditar Fotos Button in Header */}
-            <button
-              type="button"
-              onClick={() => setIsPhotoAuditOpen(true)}
-              id="pc-header-photo-audit-btn"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#1b1b23] hover:bg-[#282834] border border-[#f2ca50]/40 text-[#f2ca50] hover:text-white text-xs font-bold transition-all shadow-sm active:scale-95"
-              title="Auditar fotos y copiar IDs de fragancias (initialProducts.ts)"
-            >
-              <Camera className="w-3.5 h-3.5 text-[#f2ca50]" />
-              <span>Auditar Fotos</span>
             </button>
 
             {/* FAQs Button */}
@@ -1149,26 +1135,6 @@ export const DesktopShowroomView: React.FC<DesktopShowroomViewProps> = ({
           </div>
         </div>
       )}
-
-      {/* Floating "Auditar Fotos" Button (Exclusively in PC Mode) */}
-      <button
-        type="button"
-        onClick={() => setIsPhotoAuditOpen(true)}
-        id="pc-floating-photo-audit-btn"
-        className="fixed bottom-6 right-6 z-40 px-4 py-2.5 rounded-2xl bg-gradient-to-r from-[#1c1b26] to-[#252536] hover:from-[#252536] hover:to-[#323248] text-[#f2ca50] hover:text-white border border-[#f2ca50]/50 hover:border-[#f2ca50] shadow-2xl shadow-black/80 flex items-center gap-2.5 text-xs font-bold transition-all active:scale-95 group cursor-pointer"
-        title="Auditar fotos de todos los productos en cuadrícula compacta"
-      >
-        <div className="w-6 h-6 rounded-lg bg-[#f2ca50]/15 flex items-center justify-center group-hover:scale-110 transition-transform">
-          <Camera className="w-3.5 h-3.5 text-[#f2ca50]" />
-        </div>
-        <span>Auditar Fotos</span>
-      </button>
-
-      {/* Compact Photo Audit Grid Modal */}
-      <PhotoAuditGridModal
-        isOpen={isPhotoAuditOpen}
-        onClose={() => setIsPhotoAuditOpen(false)}
-      />
 
       {/* Business Movements View (Ventas & Stock) inside Desktop Showroom */}
       {isBusinessModeOpen && (
